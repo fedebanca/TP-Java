@@ -21,7 +21,12 @@ public class Cocinero extends Tripulante {
 
     @Override
     public String serRobado() {
-        //return y error
+        if(ingredientes.isEmpty()){
+            throw new UnsupportedOperationException();
+        }
+       String unObjeto = elementoAlAzar(ingredientes);
+       ingredientes.remove(unObjeto);
+       return unObjeto;
     }
 
     @Override

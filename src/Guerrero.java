@@ -10,7 +10,7 @@ public class Guerrero extends Tripulante{
 
     @Override
     public String serRobado() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override

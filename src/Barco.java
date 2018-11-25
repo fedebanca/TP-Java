@@ -1,3 +1,6 @@
+import exceptions.NoHayBalasSuficientes;
+
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -11,6 +14,7 @@ public class Barco {
     private Integer poderDeFuego;
     private Integer municiones;
     private List<Tripulante> tripulacion = new ArrayList<Tripulante>();
+    private Bando bando;
 
     public Optional<Tripulante> capitan() { //ver que onda esto
         return tripulacion.stream().max(Comparator.comparing(Tripulante::poderDeMando));
@@ -59,11 +63,17 @@ public class Barco {
     }
 
     public void dispararA(Barco unBarco, Integer unasBalas) {
-        if(unasBalas > this.municiones){
-            unBarco.serDisparado(unasBalas);
+        try {
+            if (unasBalas > this.municiones) {
+                this.municiones -= unasBalas;
+                unBarco.serDisparado(unasBalas);
+            } else {
+                throw new UnsupportedOperationException();
+            }
         }
-        else{
-            throw new NoHayBalasSuficientes("No hay balas suficientes")
+
+        catch(Exception e) {
+            System.out.println("No hay balas suficientes");
         }
     }
 
@@ -74,5 +84,17 @@ public class Barco {
 
     public void perderTripulantesCansados() {
         tripulacion = this.tripulacion.stream().filter(tripulante -> tripulante.noEstaCansado()).collect(Collectors.toList());
+    }
+
+    public void aumentarPorcentajeMunciones(Integer unPorcentaje) {
+        this.municiones = this.municiones*unPorcentaje/100;
+    }
+
+    public void aumentarPoderDeFuego(Integer unaCantidad) {
+        this.poderDeFuego += unaCantidad;
+    }
+
+    public void duplicarTripulacion() {
+        this.tripulacion.addAll(this.tripulacion);
     }
 }

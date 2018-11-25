@@ -33,13 +33,12 @@ public class JackSparrow extends Tripulante { //Como hacer singleton
         this.robarIngrediente(unTripulante);
     }
 
-    private void robarIngrediente(Tripulante unTripulante) throws {
+    private void robarIngrediente(Tripulante unTripulante)  {
         try{
             String objeto = unTripulante.serRobado();
             objetos.add(objeto);
-        }catch(NoTeEntregoNadaGato e){
-            e.printStackTrace();
-            System.out.println( "oh nooo");
+        }catch(Exception e){
+            System.out.println( "No se puede robar un objeto");
         }
 
     }

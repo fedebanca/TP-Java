@@ -1,18 +1,18 @@
-public class Navegante  extends Tripulante{
-    private Integer inteligencia;
+public class Monstruo extends Tripulante {
+    private Integer poderDePelea;
 
-    @Override
     public Integer poderDeMando() {
-        return this.inteligencia * this.inteligencia;
+        return poderDePelea;
     }
 
     @Override
     public String serRobado() {
         throw new UnsupportedOperationException();
+
     }
 
     @Override
     public void serHerido() {
-        this.inteligencia /= 2;
+        poderDePelea /= 2;
     }
 }
